@@ -1,0 +1,29 @@
+KITs
+v1
+
+Copyleft 2013 xjurp20, xradd02, xhalt04, xsedl17
+4IT115, FIS, VŠE, 2013
+
+
+@ INTRO
+	> KITs je program pro evidenci stazi pro studenty KIT
+
+
+@ TODO
+	> verze 2
+
+
+@ HISTORY
+	verze 1
+		> implementovany jen zakladni funkce programu (MVP)
+
+
+@ CODE
+	> read the code ;)
+
+
+@ COMMENTS
+	> veskere chyby programu zaznamenavany do souboru "kits.log"
+		> Windows => C:\Temp\kits.log
+		> GNU/Linux => /tmp/kits.log
+

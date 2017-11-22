@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<firmy>
+    <firma id="0">
+        <nazev>Lenovo Inc.</nazev>
+        <ico>12345678</ico>
+        <adresa>
+            <lokalita>Praha</lokalita>
+            <mesto>Křivoklát</mesto>
+            <ulice>U mučírny</ulice>
+            <CP>1</CP>
+            <PSC>91100</PSC>
+        </adresa>
+        <kontakt>
+            <jmeno>Ludmila Červená</jmeno>
+            <email>cervena@lenovo.com</email>
+            <telefon>123456789</telefon>
+        </kontakt>
+        <staze>
+            <staz id="0">
+                <nazev>Linux administrátor</nazev>
+                <obor>ICT</obor>
+                <datNastupu>Thu Jun 20 21:40:29 CEST 2013</datNastupu>
+                <delka>60</delka>
+                <kapacita>2</kapacita>
+                <lokalita>Praha</lokalita>
+                <popis>
+                    -- napln prace --
+                    konfiguruje a spravuje linuxové systémy
+                    spravuje datová úložiště
+                    implementuje bezpečnostní politiky na servery
+                    instaluje a implementuje nová zařízení a SW dle požadavků
+                    udržuje servery v aktuálním stavu, instaluje bezpečnostní záplaty
+                    -- pozadavky --
+                    min. SŠ
+                    min. 4 roky praxe v oboru IT, z toho 2 roky na obdobné pozici
+                    perfektní znalost operačního systému Linux 
+                    znalost síťového protokolu TCP/IP
+                    znalost systémového programování (Bash, Python) 
+                    znalost databáze PostgreSQL výhodou 
+                    -- vyhody --
+                    motivační finanční ohodnocení
+                    zajímavou práci ve stabilní společnosti
+                </popis>		
+                <studenti>
+                    <student id="0">
+                        <jmeno>Květoslav Květený</jmeno>
+                        <email>xkvek42@vse.cz</email>
+                        <telefon>123456789</telefon>
+                        <xname>xkvek42</xname>
+                        <datNar>Thu Feb 13 21:40:29 CEST 2013</datNar>
+                        <fakulta>FIS</fakulta>
+                        <semestr>4</semestr>
+                    </student>
+                </studenti>
+            </staz>
+            <staz id="1">
+                <nazev>Web fronted</nazev>
+                <obor>ICT</obor>
+                <datNastupu>Thu Jun 28 21:40:29 CEST 2013</datNastupu>
+                <delka>30</delka>
+                <kapacita>1</kapacita>
+                <lokalita>Praha</lokalita>
+                <popis>
+                    -- napln prace --
+                    spravuje vzhled firemnich stranek
+                    -- pozadavky --
+                    min. VŠ
+                    praxe neni podminkou
+                    znalost HTML5 je samozrejmosti
+                    znalost MongoDB nebo Ajax je vyhodou
+                    -- vyhody --
+                    nadstandardni financni ohodnoceni			
+                    prace v mladem kolektivu
+                </popis>
+                <studenti>
+                </studenti>
+            </staz>
+        </staze>
+    </firma>
+</firmy>

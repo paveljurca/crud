@@ -1,0 +1,66 @@
+package model;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author xjurp20
+ */
+public class Osoba {
+
+    public enum Atribut {
+
+        JMENO, //String
+        EMAIL, //String
+        TELEFON; //int
+
+        @Override
+        public String toString() {
+            return name().toLowerCase();
+        }
+    }
+    protected Map<String, Object> atributy;
+
+    public Osoba(String jmeno, String email, int telefon) {
+        atributy = new HashMap<>();
+        atributy.put(Osoba.Atribut.JMENO.toString(), jmeno);
+        atributy.put(Osoba.Atribut.EMAIL.toString(), email);
+        atributy.put(Osoba.Atribut.TELEFON.toString(), telefon);
+    }
+
+    /**
+     * Vrat hodnotu atributu
+     * 
+     * @param nazev atributu
+     * @return hodnota atributu
+     */
+    public Object getAtribut(String atribut) {
+        return atributy.get(atribut.toLowerCase());
+    }
+
+    /**
+     * Nastav atributu novou hodnotu
+     * 
+     * @return true, pokud se hodnota atributu zmenila
+     */
+    public boolean setAtribut(String atribut, Object hodnota) {
+        attr:
+        for (Osoba.Atribut a : Osoba.Atribut.values()) {
+            if (atribut.equalsIgnoreCase(a.toString())) {
+                if (a == Osoba.Atribut.TELEFON && !(hodnota instanceof Integer)) {
+                    return false;
+                }
+                atributy.put(atribut, hodnota);
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    @Override
+    public String toString() {
+        return (String)atributy.get(Osoba.Atribut.JMENO.toString());
+    }
+}

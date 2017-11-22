@@ -1,0 +1,85 @@
+package model;
+
+import java.util.Date;
+
+/**
+ *
+ * @author xjurp20
+ */
+public class Student extends Osoba {
+
+    public enum Atribut {
+
+        JMENO, //String
+        EMAIL, //String
+        TELEFON, //int
+        XNAME, //String
+        DATNAR, //Date
+        FAKULTA, //Student.Fakulta
+        SEMESTR; //int
+
+        @Override
+        public String toString() {
+            return name().toLowerCase();
+        }
+    }
+
+    public enum Fakulta {
+
+        FFU,
+        FMV,
+        FPH,
+        FIS,
+        NF,
+        FM;
+    }
+
+    public Student(
+            String jmeno,
+            String email,
+            int telefon,
+            String xname,
+            Date datNar,
+            Fakulta fakulta,
+            int semestr) {
+
+        super(jmeno, email, telefon);
+        atributy.put(Student.Atribut.XNAME.toString(), xname);
+        atributy.put(Student.Atribut.DATNAR.toString(), datNar);
+        atributy.put(Student.Atribut.FAKULTA.toString(), fakulta);
+        atributy.put(Student.Atribut.SEMESTR.toString(), semestr);
+    }
+
+    /**
+     * Nastav atributu novou hodnotu
+     *
+     * @return true, pokud se hodnota atributu zmenila
+     */
+    @Override
+    public boolean setAtribut(String atribut, Object hodnota) {
+        attr:
+        for (Student.Atribut a : Student.Atribut.values()) {
+            if (atribut.equalsIgnoreCase(a.toString())) {
+                if ((a == Student.Atribut.TELEFON || a == Student.Atribut.SEMESTR)
+                        && !(hodnota instanceof Integer)) {
+                    return false;
+                }
+                if (a == Student.Atribut.DATNAR && !(hodnota instanceof Date)) {
+                    return false;
+                }
+                if (a == Student.Atribut.FAKULTA && !(hodnota instanceof Fakulta)) {
+                    return false;
+                }
+                atributy.put(atribut, hodnota);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return (String) atributy.get(Student.Atribut.XNAME.toString());
+    }
+}

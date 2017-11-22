@@ -1,0 +1,208 @@
+package model;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ *
+ * @author xjurp20
+ */
+public class Staz implements Comparable<Staz> {
+
+    public enum Atribut {
+
+        NAZEV, //String
+        OBOR, //Staz.Obor
+        DATNASTUPU, //Date
+        DELKA, //int jako pocet dni
+        KAPACITA, //int
+        LOKALITA, //Staz.Lokalita
+        POPIS; //String
+
+        @Override
+        public String toString() {
+            return name().toLowerCase();
+        }
+    }
+
+    public enum Obor {
+
+        Administrativa,
+        Bankovnictví,
+        Potravinářství,
+        Farmacie,
+        ICT,
+        Kultura,
+        Logistika,
+        Marketing,
+        Právo,
+        Stavebnictví,
+        Strojírenství,
+        Výzkum,
+        Školství,
+        Management;
+    }
+
+    public enum Lokalita {
+
+        Praha,
+        JižníČechy,
+        SeverníČechy,
+        VýchodníČechy,
+        ZápadníČechy,
+        Morava,
+        Slezsko,
+        Zahraničí;
+    }
+    private Map<String, Object> atributy;
+    private Set<Student> studenti;
+
+    public Staz(
+            String nazev,
+            Staz.Obor obor,
+            Date datNastupu,
+            int delka,
+            int kapacita,
+            Staz.Lokalita lokalita,
+            String popis) {
+
+        atributy = new HashMap<>();
+        studenti = new HashSet<>();
+        atributy.put(Staz.Atribut.NAZEV.toString(), nazev);
+        atributy.put(Staz.Atribut.OBOR.toString(), obor);
+        atributy.put(Staz.Atribut.DATNASTUPU.toString(), datNastupu);
+        atributy.put(Staz.Atribut.DELKA.toString(), delka);
+        atributy.put(Staz.Atribut.KAPACITA.toString(), kapacita);
+        atributy.put(Staz.Atribut.LOKALITA.toString(), lokalita);
+        atributy.put(Staz.Atribut.POPIS.toString(), popis);
+    }
+
+    /**
+     * Vrat hodnotu atributu
+     *
+     * @param nazev atributu
+     * @return hodnota atributu
+     */
+    public Object getAtribut(String atribut) {
+        return atributy.get(atribut.toLowerCase());
+    }
+
+    /**
+     * Nastav atributu novou hodnotu
+     *
+     * @return true, pokud se hodnota atributu zmenila
+     */
+    public boolean setAtribut(String atribut, Object hodnota) {
+        attr:
+        for (Staz.Atribut a : Staz.Atribut.values()) {
+            if (atribut.equalsIgnoreCase(a.toString())) {
+                if (a == Staz.Atribut.LOKALITA
+                        && !(hodnota instanceof Staz.Lokalita)) {
+                    return false;
+                }
+                if (a == Staz.Atribut.OBOR
+                        && !(hodnota instanceof Staz.Obor)) {
+                    return false;
+                }
+                if (a == Staz.Atribut.DATNASTUPU
+                        && !(hodnota instanceof Date)) {
+                    return false;
+                }
+                if ((a == Staz.Atribut.DELKA || a == Staz.Atribut.KAPACITA)
+                        && !(hodnota instanceof Integer)) {
+                    return false;
+                }
+                atributy.put(atribut, hodnota);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Prihlasit studenta na stazi
+     *
+     * @param student
+     * @return false, pokud by uz staz prevysila svoji kapacitu
+     */
+    public boolean prihlasitStudenta(Student student) {
+        if (volnaMista() > 0) {
+            studenti.add(student);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void odhlasitStudenta(String xname) {
+        for (Student s : studenti) {
+            if (xname.equalsIgnoreCase(s.toString())) {
+                studenti.remove(s);
+                break;
+            }
+        }
+    }
+
+    public Set<Student> getStudenty() {
+        return Collections.unmodifiableSet(studenti);
+    }
+
+    public int volnaMista() {
+        return ((int) atributy.get(Staz.Atribut.KAPACITA.toString())
+                - studenti.size());
+    }
+
+    /**
+     * Metoda equals pro porovnání s další instancí třídy Staz (obecně s
+     * jakýmkoliv objektem). Podrobný popis této metody je u třídy Object. Dvě
+     * instance třídy Staz jsou stejné, pokud mají stejnou zkratku (tj. nezáleží
+     * na názvu útvaru).
+     *
+     * @param o druhý útvar/Object, se kterým se má aktuální instance porovnat
+     * @return true, pokud jsou instance stejné - pokud obsahují stejnou zkratku
+     * (název se neporovnává).
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Staz) {
+            Staz druha = (Staz) o;
+            Date _this = (Date) atributy.get(Staz.Atribut.DATNASTUPU.toString());
+            Date _that = (Date) druha.getAtribut(Staz.Atribut.DATNASTUPU.toString());
+            return _this.equals(_that);
+        }
+
+        return false;
+    }
+
+    /**
+     * Metoda vrací číselnou hodnotu vyjadřující konkrétní instanci. Používá se
+     * pro optimalizaci v dynamických datových strukturách. Bližší popis viz
+     * třída Object.
+     *
+     * @return číselný kód vyjadřující instanci
+     */
+    @Override
+    public int hashCode() {
+        return atributy.get(Staz.Atribut.DATNASTUPU.toString()).hashCode();
+    }
+
+    /**
+     * Compare to a next object in a TreeSet //uses String.compareTo()
+     *
+     * @param dalsi_staz a next object in a TreeSet
+     *
+     * @return integer as a result of comparing defined in a Comparable class
+     */
+    @Override
+    public int compareTo(Staz dalsi_staz) {
+        Date _this = (Date) atributy.get(Staz.Atribut.DATNASTUPU.toString());
+        Date _that = (Date) dalsi_staz.getAtribut(Staz.Atribut.DATNASTUPU.toString());
+
+        return _this.compareTo(_that);
+    }
+}

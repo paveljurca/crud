@@ -1,0 +1,136 @@
+package model;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+/**
+ *
+ * @author xjurp20
+ */
+public class Firma implements Comparable<Firma> {
+
+    public enum Atribut {
+
+        NAZEV, //String
+        ICO, //int
+        ADRESA, //Adresa
+        KONTAKT; //int
+
+        @Override
+        public String toString() {
+            return name().toLowerCase();
+        }
+    }
+    private Map<String, Object> atributy;
+    private SortedSet<Staz> staze;
+
+    public Firma(
+            String nazev,
+            int ico,
+            Adresa adresa,
+            Osoba kontakt) {
+
+        atributy = new HashMap<>();
+        staze = new TreeSet<>();
+        atributy.put(Firma.Atribut.NAZEV.toString(), nazev);
+        atributy.put(Firma.Atribut.ICO.toString(), ico);
+        atributy.put(Firma.Atribut.ADRESA.toString(), adresa);
+        atributy.put(Firma.Atribut.KONTAKT.toString(), kontakt);
+    }
+
+    /**
+     * Vrat hodnotu atributu
+     *
+     * @param nazev atributu
+     * @return hodnota atributu
+     */
+    public Object getAtribut(String atribut) {
+        return atributy.get(atribut.toLowerCase());
+    }
+
+    /**
+     * Nastav atributu novou hodnotu
+     *
+     * @return true, pokud se hodnota atributu zmenila
+     */
+    public boolean setAtribut(String atribut, Object hodnota) {
+        attr:
+        for (Firma.Atribut a : Firma.Atribut.values()) {
+            if (atribut.equalsIgnoreCase(a.toString())) {
+                if (a == Firma.Atribut.ADRESA
+                        && !(hodnota instanceof Adresa)) {
+                    return false;
+                }
+                if (a == Firma.Atribut.KONTAKT
+                        && !(hodnota instanceof Osoba)) {
+                    return false;
+                }
+                if (a == Firma.Atribut.ICO
+                        && !(hodnota instanceof Integer)) {
+                    return false;
+                }
+                atributy.put(atribut, hodnota);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public SortedSet<Staz> getStaze() {
+        return Collections.unmodifiableSortedSet(staze);
+    }
+
+    /**
+     * Metoda equals pro porovnání s další instancí třídy Firma (obecně s
+     * jakýmkoliv objektem). Podrobný popis této metody je u třídy Object. Dvě
+     * instance třídy Firma jsou stejné, pokud mají stejnou zkratku (tj.
+     * nezáleží na názvu útvaru).
+     *
+     * @param o druhý útvar/Object, se kterým se má aktuální instance porovnat
+     * @return true, pokud jsou instance stejné - pokud obsahují stejnou zkratku
+     * (název se neporovnává).
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Firma) {
+            Firma druha = (Firma) o;
+            Integer _this = Integer.valueOf(staze.size());
+            Integer _that = Integer.valueOf(druha.getStaze().size());
+            
+            return _this.equals(_that);
+        }
+
+        return false;
+    }
+
+    /**
+     * Metoda vrací číselnou hodnotu vyjadřující konkrétní instanci. Používá se
+     * pro optimalizaci v dynamických datových strukturách. Bližší popis viz
+     * třída Object.
+     *
+     * @return číselný kód vyjadřující instanci
+     */
+    @Override
+    public int hashCode() {
+        return Integer.valueOf(staze.size()).hashCode();
+    }
+
+    /**
+     * Compare to a next object in a TreeSet //uses String.compareTo()
+     *
+     * @param dalsi_firma a next object in a TreeSet
+     *
+     * @return integer as a result of comparing defined in a Comparable class
+     */
+    @Override
+    public int compareTo(Firma dalsi_firma) {
+        Integer _this = Integer.valueOf(staze.size());
+        Integer _that = Integer.valueOf(dalsi_firma.getStaze().size());
+        
+        return _this.compareTo(_that);
+    }
+}

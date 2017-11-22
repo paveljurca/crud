@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<studenti>
+    <student id="0">
+        <jmeno>František Vopička</jmeno>
+        <email>xvopf12@vse.cz</email>
+        <telefon>123456789</telefon>
+        <xname>xvopf12</xname>
+	<datnar>18/04/1994</datnar>
+        <fakulta>FIS</fakulta>
+        <semestr>2</semestr>
+    </student>
+    <student id="1">
+        <jmeno>Květoslav Květený</jmeno>
+        <email>xkvek42@vse.cz</email>
+        <telefon>123456789</telefon>
+        <xname>xkvek42</xname>
+	<datnar>17/05/1993</datnar>
+        <fakulta>FIS</fakulta>
+        <semestr>4</semestr>
+    </student>
+    <student id="2">
+        <jmeno>John Doe</jmeno>
+        <email>xdoej68@vse.cz</email>
+        <telefon>123456789</telefon>
+        <xname>xdoej68</xname>
+	<datnar>16/06/1992</datnar>
+        <fakulta>FIS</fakulta>
+        <semestr>6</semestr>
+    </student> 
+</studenti>

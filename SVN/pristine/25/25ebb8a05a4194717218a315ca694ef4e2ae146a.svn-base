@@ -1,0 +1,9 @@
+package model;
+
+/**
+ *
+ * @author xjurp20
+ */
+public interface IModel {
+
+}
